@@ -33,7 +33,5 @@ async function processHar(harPath, outPath) {
     }
   }
 
-  console.log(filesToDownload);
-
   await Promise.all(filesToDownload.map((url) => download(url, outPath)));
 }

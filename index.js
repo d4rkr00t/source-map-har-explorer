@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fetchCommand = require("./commands/fetchCommand");
 const exploreCommand = require("./commands/exploreCommand");
 const duplicatesCommand = require("./commands/duplicatesCommand");
@@ -6,7 +8,7 @@ const command = process.argv[2];
 const args = Array.prototype.slice.call(process.argv, 3);
 const cwd = process.cwd();
 
-const DEFAULT_OUTPUT_PATH = "out";
+const DEFAULT_OUTPUT_PATH = "har-explorer-output";
 
 if (command === "fetch") {
   const harPath = args[0];
