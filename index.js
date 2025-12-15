@@ -11,6 +11,7 @@ const args = Array.prototype.slice.call(process.argv, 3);
 const cwd = process.cwd();
 
 const DEFAULT_OUTPUT_PATH = "har-explorer-output";
+const DEFAULT_EXPLORE_HTML_PATH = "explorer.html";
 
 if (command === "fetch") {
   const harPath = args[0];
@@ -28,8 +29,11 @@ if (command === "fetch") {
   });
 } else if (command === "explore") {
   const outPath = args[0] ?? DEFAULT_OUTPUT_PATH;
+  const explorerHTMLPath = args[1]
+    ? `${args[1]}.html`
+    : DEFAULT_EXPLORE_HTML_PATH;
 
-  exploreCommand(cwd, "explorer.html", outPath);
+  exploreCommand(cwd, explorerHTMLPath, outPath);
 } else if (command === "dupes") {
   const outPath = args[0] ?? DEFAULT_OUTPUT_PATH;
 
