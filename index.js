@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const path = require("node:path");
+
 const fetchCommand = require("./commands/fetchCommand");
 const exploreCommand = require("./commands/exploreCommand");
 const duplicatesCommand = require("./commands/duplicatesCommand");
@@ -19,7 +21,11 @@ if (command === "fetch") {
 
   const outPath = args[1] ?? DEFAULT_OUTPUT_PATH;
 
-  fetchCommand(cwd, harPath, outPath);
+  fetchCommand(cwd, harPath, outPath).then(() => {
+    console.log("- Running explore on downloaded files:", outPath);
+    const explorerHTMLPath = `${path.basename(harPath)}.html`;
+    exploreCommand(cwd, explorerHTMLPath, outPath);
+  });
 } else if (command === "explore") {
   const outPath = args[0] ?? DEFAULT_OUTPUT_PATH;
 
