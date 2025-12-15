@@ -20,9 +20,13 @@ module.exports = async function duplicatesCommand(cwd, outPath) {
     const packagesMap = {};
 
     for (const { bundleName, files } of bundles) {
-      for (const file of Object.keys(files)) {
+      for (let file of Object.keys(files)) {
         if (IGNORED_FILE_PATHS.has(file)) {
           continue;
+        }
+        if (file.includes("node_modules")) {
+          [_, ...file] = file.split("node_modules");
+          file = `node_modules${file.join("/")}`;
         }
         packagesMap[file] = packagesMap.file ?? [];
         packagesMap[file].push(bundleName.replace(fullOutPath, ""));
