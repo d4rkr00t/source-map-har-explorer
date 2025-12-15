@@ -15,7 +15,7 @@ module.exports = async function fetchCommand(cwd, harPath, outPath) {
 function reset(outPath) {
   if (fs.existsSync(outPath)) {
     console.log("- Cleaning old output at:", outPath);
-    fs.rmdirSync(outPath, { recursive: true });
+    fs.rmSync(outPath, { recursive: true, force: true });
   }
   console.log("- Creating output folder at:", outPath);
   fs.mkdirSync(outPath);
